@@ -1,0 +1,70 @@
+name: Deploy Automático Agendado
+
+# on:
+#   schedule:
+#     - cron: '*/6 * * * *' # Executa a cada 5 minutos
+
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types: [redeploy]
+  # schedule:
+  #   - cron: '*/10 * * * *'  # Corrigido para executar a cada 5 minutos
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar dependências do sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            wget \
+            gnupg \
+            ca-certificates \
+            apt-transport-https \
+            xvfb \
+            && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Instalar Google Chrome
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
+          && echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list \
+          && sudo apt-get update \
+          && sudo apt-get install -y google-chrome-stable \
+          && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Instalar dependências do Node.js
+        run: npm update && npm install
+
+      - name: Obter IP do servidor
+        run: |
+          IP=$(curl -s ifconfig.me)
+          echo "O IP público do servidor é: $IP"
+
+      - name: Executar node index.js
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          COOKIES: ${{ secrets.COOKIES }}
+        run: node index.js
+
+      - name: Upload screen.png as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot
+          path: screen.png
