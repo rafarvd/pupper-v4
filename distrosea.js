@@ -1,5 +1,5 @@
 const { connect } = require("puppeteer-real-browser");
-const redeploy = require("./redeploy.js");
+// const redeploy = require("./redeploy.js");
 
 const sleep = (seconds) => {
   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
@@ -62,34 +62,34 @@ const distrosea = async () => {
 
     await sleep(5);
 
-    browser.on("targetcreated", async (target) => {
-      const newPage = await target.page();
-      if (newPage) {
-        console.log("Nova aba detectada!");
-        await newPage.waitForSelector('div[role="link"]');
-        await newPage.click('div[role="link"]');
-      }
-    });
+    // browser.on("targetcreated", async (target) => {
+    //   const newPage = await target.page();
+    //   if (newPage) {
+    //     console.log("Nova aba detectada!");
+    //     await newPage.waitForSelector('div[role="link"]');
+    //     await newPage.click('div[role="link"]');
+    //   }
+    // });
 
-    await sleep(5);
+    // await sleep(5);
 
-    await page.waitForSelector('iframe[src*="accounts.google.com"]');
-    await page.click('iframe[src*="accounts.google.com"]');
+    // await page.waitForSelector('iframe[src*="accounts.google.com"]');
+    // await page.click('iframe[src*="accounts.google.com"]');
 
-    await sleep(5);
+    // await sleep(5);
 
-    let logado = await page.waitForSelector(
-      'img[src*="https://lh3.googleusercontent.com/a/"]'
-    );
+    // let logado = await page.waitForSelector(
+    //   'img[src*="https://lh3.googleusercontent.com/a/"]'
+    // );
 
     // await sleep(5);
     await page.waitForSelector("#start-button");
     await page.click("#start-button");
     // await sleep(10);
-    await page.waitForSelector("#continue-button");
-    await page.click("#continue-button");
-    const url = page.url();
-    console.log("URL da página:", url);
+    // await page.waitForSelector("#continue-button");
+    // await page.click("#continue-button");
+    // const url = page.url();
+    // console.log("URL da página:", url);
     //   logado = false;
 
     // await sleep(20);
