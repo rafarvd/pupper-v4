@@ -8,7 +8,7 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.get("/screen", distrosea());
+app.get("/screen", distrosea);
 
 app.listen(PORT, () => {
   console.log(`Servidor está rodando na porta ${PORT}`);
