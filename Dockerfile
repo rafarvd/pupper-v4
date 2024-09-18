@@ -3,6 +3,7 @@ FROM node:20
 
 # Install necessary dependencies for running Chrome
 RUN apt-get update && apt-get install -y \
+    sudo \
     wget \
     gnupg \
     ca-certificates \
