@@ -109,4 +109,4 @@ const distrosea = async () => {
   }
 };
 
-module.exports = distrosea;
+module.exports = { distrosea };
