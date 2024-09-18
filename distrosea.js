@@ -103,7 +103,7 @@ const distrosea = async () => {
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
     console.log("Reabrindo...");
-    redeploy();
+    // redeploy();
   } finally {
     await browser.close();
   }
