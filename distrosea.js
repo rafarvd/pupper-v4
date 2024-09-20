@@ -24,8 +24,8 @@ const distrosea = async () => {
     disableXvfb: false,
     ignoreAllFlags: false,
     proxy: {
-      host:'5.35.70.97',
-      port:'3333',
+      host:'74.235.214.93',
+      port:'3128',
       username:'admin',
       password:'admin',
     }
