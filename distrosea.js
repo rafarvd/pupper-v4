@@ -25,7 +25,7 @@ const distrosea = async () => {
     ignoreAllFlags: false,
     proxy: {
       host:'5.35.70.97',
-      port:'32768',
+      port:'3333',
       // username:'admin',
       // password:'w361mzdTAibA9EWF'
     }
