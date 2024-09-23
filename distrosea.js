@@ -40,6 +40,8 @@ const distrosea = async () => {
     page.setDefaultNavigationTimeout(110000); // 2 minutos
     page.setDefaultTimeout(110000); // 2 minutos
 
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36');
+
     await page.setRequestInterception(true);
     page.on("request", (req) => {
       const url = req.url();
