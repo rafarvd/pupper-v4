@@ -73,7 +73,7 @@ const distrosea = async () => {
     //   }, { timeout: 600000 }
     // );
 
-    await sleep(5);
+    await sleep(30);
 
     // browser.on("targetcreated", async (target) => {
     //   const newPage = await target.page();
