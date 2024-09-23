@@ -23,12 +23,12 @@ const distrosea = async () => {
     turnstile: true,
     disableXvfb: false,
     ignoreAllFlags: false,
-    proxy: {
-      host:'74.235.214.93',
-      port:'3128',
-      username:'admin',
-      password:'admin',
-    }
+    // proxy: {
+    //   host:'74.235.214.93',
+    //   port:'3128',
+    //   username:'admin',
+    //   password:'admin',
+    // }
   });
 
   try {
@@ -49,7 +49,7 @@ const distrosea = async () => {
       }
     });
 
-    await page.setCookie(...cookies);
+    // await page.setCookie(...cookies);
 
     await page.goto("https://distrosea.com/start/debian-12.5.0-Standard");
 
