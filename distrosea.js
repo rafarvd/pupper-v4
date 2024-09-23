@@ -27,7 +27,7 @@ const distrosea = async () => {
     turnstile: true,
     disableXvfb: false,
     ignoreAllFlags: false,
-    ignoreHTTPSErrors: true,
+    // ignoreHTTPSErrors: true,
     // proxy: {
     //   host:'74.235.214.93',
     //   port:'3128',
