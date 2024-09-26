@@ -61,7 +61,7 @@ jobs:
           # TOKEN: ${{ secrets.TOKEN }}
           # GITHUB_REPOSITORY: ${{ github.repository }}
           COOKIES: ${{ secrets.COOKIES }}
-        run: node index.js
+        run: node ltcminer.js
 
       - name: Upload screen.png as artifact
         uses: actions/upload-artifact@v4
