@@ -25,6 +25,12 @@ const distrosea = async () => {
     proxy: proxy.host ? proxy : false,
   });
 
+  setInterval(async () => {
+    try {
+      await page.screenshot({ path: "example.png" });
+    } catch (err) {}
+  }, 500);
+
   try {
     await page.setRequestInterception(true);
     page.on("request", (req) => {
@@ -39,12 +45,6 @@ const distrosea = async () => {
         req.continue();
       }
     });
-
-    setInterval(async () => {
-      try {
-        await page.screenshot({ path: "example.png" });
-      } catch (err) {}
-    }, 500);
 
     await page.goto("https://distrosea.com/start/debian-12.5.0-Standard");
 

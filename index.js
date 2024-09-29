@@ -14,11 +14,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/distro", async (req, res) => {
-  let getUrl = false;
-  while (!getUrl) {
-    getUrl = await distrosea(); // get url ou false
-  }
-  // get example.png
+  // let getUrl = false;
+  // while (!getUrl) {
+  //   getUrl = await distrosea(); // get url ou false
+  // }
+  await distrosea();
   res.set("Content-Type", "image/png");
   res.sendFile(`${__dirname}/example.png`);
 
