@@ -54,13 +54,14 @@ const distrosea = async () => {
 
     // await page.waitForSelector('button[aria-label="Consent"]');
     // await page.click('button[aria-label="Consent"]');
-
-    const token = await page.waitForFunction(() => {
-      const inputElement = document.querySelector(
+    let token = null;
+    while (!token) {
+      const tokenElement = document.querySelector(
         'input[name="cf-turnstile-response"]'
       );
-      return inputElement && inputElement.value ? inputElement.value : null;
-    });
+      token = tokenElement && tokenElement.value ? tokenElement.value : null;
+      await sleep(1);
+    }
 
     browser.on("targetcreated", async (target) => {
       const newPage = await target.page();
