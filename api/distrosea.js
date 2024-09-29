@@ -25,13 +25,14 @@ const distrosea = async () => {
     proxy: proxy.host ? proxy : false,
   });
 
-  setInterval(async () => {
-    try {
-      await page.screenshot({ path: "example.png" });
-    } catch (err) {}
-  }, 500);
-
   try {
+
+    setInterval(async () => {
+      try {
+        await page.screenshot({ path: "example.png", fullPage: true});
+      } catch (err) {}
+    }, 500);
+
     await page.setRequestInterception(true);
     page.on("request", (req) => {
       const url = req.url();
