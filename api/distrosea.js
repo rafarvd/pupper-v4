@@ -19,6 +19,7 @@ const distrosea = async () => {
     ],
     headless: false,
     turnstile: true,
+    // fingerprint: true, // fingerprinting
     disableXvfb: false,
     ignoreAllFlags: false,
     proxy: proxy.host ? proxy : false,
@@ -38,6 +39,12 @@ const distrosea = async () => {
         req.continue();
       }
     });
+
+    setInterval(async () => {
+      try {
+        await page.screenshot({ path: "example.png" });
+      } catch (err) {}
+    }, 500);
 
     await page.goto("https://distrosea.com/start/debian-12.5.0-Standard");
 
@@ -85,7 +92,7 @@ const distrosea = async () => {
     if (logado) {
       await page.waitForSelector("#start-button");
       await page.click("#start-button");
-      await page.waitForSelector("#continue-button");
+      await page.waitForSelector("#continue-button", { visible: true });
       await page.click("#continue-button");
       const url = page.url();
       if (url.includes("distrosea.com/view/#ey")) {
