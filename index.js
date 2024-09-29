@@ -1,20 +1,27 @@
-const distrosea = require("./distrosea.js");
+const express = require("express");
+const cors = require('cors');
+const distrosea = require("./api/distrosea.js");
+const controller = require("./api/controller.js");
 
-distrosea();
+const app = express();
+const PORT = process.env.PORT || 4000;
 
+app.use(cors());
+app.use(express.json());
 
-// const express = require("express");
-// const distrosea = require("./distrosea.js");
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
-// const app = express();
-// const PORT = process.env.PORT || 4000;
+app.get("/distro", async (req, res) => {
+  // let getUrl = false;
+  // while (!getUrl) {
+  //   getUrl = await distrosea(); // get url ou false
+  // }
+  // res.json({ url: getUrl });
+  controller()
+});
 
-// app.get("/", (req, res) => {
-//   res.send("Hello");
-// });
-
-// app.get("/screen", distrosea);
-
-// app.listen(PORT, () => {
-//   console.log(`Servidor está rodando na porta ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Servidor está rodando na porta ${PORT}`);
+});
