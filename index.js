@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
 const distrosea = require("./api/distrosea.js");
 const controller = require("./api/controller.js");
 
@@ -19,7 +19,7 @@ app.get("/distro", async (req, res) => {
   //   getUrl = await distrosea(); // get url ou false
   // }
   // res.json({ url: getUrl });
-  controller()
+  await controller();
 });
 
 app.listen(PORT, () => {

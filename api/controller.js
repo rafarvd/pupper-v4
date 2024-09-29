@@ -46,7 +46,7 @@ const controller = async () => {
 
     await page.waitForSelector("body");
 
-    await sleep(5);
+    await sleep(10);
 
     let text = "";
     text +=
