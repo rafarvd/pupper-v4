@@ -18,22 +18,30 @@ const distrosea = async () => {
       "--disable-images",
       "--disable-web-security",
       "--disable-features=IsolateOrigins,site-per-process",
+      "--disable-webgl",
+      "--disable-features=IsolateOrigins,site-per-process",
+      "--mute-audio",
+      "--disable-webrtc",
     ],
     headless: false,
     turnstile: true,
     disableXvfb: false,
     ignoreAllFlags: false,
-    proxy: {
-      host:'74.235.214.93',
-      port:'3128',
-      username:'admin',
-      password:'admin',
-    }
+    // ignoreHTTPSErrors: true,
+    // proxy: {
+    //   host:'74.235.214.93',
+    //   port:'3128',
+    //   username:'admin',
+    //   password:'admin',
+    // }
   });
 
   try {
     page.setDefaultNavigationTimeout(110000); // 2 minutos
     page.setDefaultTimeout(110000); // 2 minutos
+
+    // await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36');
+    await page.setExtraHTTPHeaders({'X-Forwarded-For': '5.35.70.97', });
 
     await page.setRequestInterception(true);
     page.on("request", (req) => {
@@ -49,7 +57,7 @@ const distrosea = async () => {
       }
     });
 
-    await page.setCookie(...cookies);
+    // await page.setCookie(...cookies);
 
     await page.goto("https://distrosea.com/start/debian-12.5.0-Standard");
 
@@ -66,7 +74,7 @@ const distrosea = async () => {
     //   }, { timeout: 600000 }
     // );
 
-    await sleep(5);
+    await sleep(30);
 
     // browser.on("targetcreated", async (target) => {
     //   const newPage = await target.page();
