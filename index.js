@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const distrosea = require("./api/distrosea.js");
 const controller = require("./api/controller.js");
+
+controller();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
