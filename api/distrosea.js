@@ -28,9 +28,7 @@ const distrosea = async () => {
   try {
 
     setInterval(async () => {
-      try {
         await page.screenshot({ path: "example.png", fullPage: true});
-      } catch (err) {}
     }, 500);
 
     await page.setRequestInterception(true);
