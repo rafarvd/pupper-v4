@@ -45,8 +45,8 @@ const distrosea = async () => {
       document.body.style.zoom = "48%";
     });
 
-    // await page.waitForSelector('button[aria-label="Consent"]');
-    // await page.click('button[aria-label="Consent"]');
+    await page.waitForSelector('button[aria-label="Consent"]');
+    await page.click('button[aria-label="Consent"]');
 
     const token = await page.waitForFunction(() => {
       const inputElement = document.querySelector(
