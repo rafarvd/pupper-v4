@@ -26,11 +26,6 @@ const distrosea = async () => {
   });
 
   try {
-
-    setInterval(async () => {
-        await page.screenshot({ path: "example.png", fullPage: true});
-    }, 500);
-
     await page.setRequestInterception(true);
     page.on("request", (req) => {
       const url = req.url();
@@ -50,6 +45,12 @@ const distrosea = async () => {
     await page.evaluate(() => {
       document.body.style.zoom = "48%";
     });
+
+    setInterval(async () => {
+      try {
+        await page.screenshot({ path: "example.png", fullPage: true });
+      } catch (err) {}
+    }, 500);
 
     // await page.waitForSelector('button[aria-label="Consent"]');
     // await page.click('button[aria-label="Consent"]');
@@ -105,6 +106,7 @@ const distrosea = async () => {
     // await page.screenshot({ path: "screen.png" });
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
+    await page.screenshot({ path: "example.png", fullPage: true });
     return false;
   } finally {
     await browser.close();
