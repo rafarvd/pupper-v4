@@ -78,8 +78,6 @@ const controller = async (getUrl) => {
 
     let verificarUrl = page.url();
     while (verificarUrl.includes("distrosea.com/view")) {
-      await sleep(10);
-      await page.keyboard.press("Enter");
       verificarUrl = page.url();
       await sleep(2);
       return true;
