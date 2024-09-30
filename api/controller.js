@@ -1,14 +1,8 @@
 const { connect } = require("puppeteer-real-browser");
-const distrosea = require("./distrosea.js");
 const proxy = require("./proxy.js");
 const sleep = require("./sleep.js");
 
 const controller = async (getUrl) => {
-  // let getUrl = false;
-  // while (!getUrl) {
-  //   getUrl = await distrosea(); // get url ou false
-  // }
-
   console.log(getUrl);
 
   const { page, browser } = await connect({
@@ -26,7 +20,6 @@ const controller = async (getUrl) => {
     turnstile: true,
     disableXvfb: false,
     ignoreAllFlags: false,
-    // proxy: proxy.host ? proxy : false,
   });
 
   try {

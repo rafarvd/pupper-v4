@@ -10,11 +10,10 @@ const host = process.env.HOST || "localhost";
 app.use(cors());
 app.use(express.json());
 
-if (process.env.RUN) {
+if (process.env.RUN === 1) {
   fetch(`${host}:4000/distro`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.url);
       controller(data.url);
       // res.json(data.url);
     });
