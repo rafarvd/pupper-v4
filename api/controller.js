@@ -76,7 +76,16 @@ const controller = async (getUrl) => {
     }
     await page.keyboard.press("Enter");
 
-    return true;
+    let verificarUrl = page.url()
+    while (verificarUrl.includes("distrosea.com/view")) {
+      await sleep(10);
+      await page.keyboard.press("Enter");
+      verificarUrl = page.url()
+      await sleep(2);
+      return true;
+    }
+
+    return false;
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
     return false;
