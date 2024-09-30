@@ -5,13 +5,13 @@ const distrosea = require("./api/distrosea.js");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const host = process.env.HOST || "localhost";
+const HOST = process.env.HOST || "localhost";
 
 app.use(cors());
 app.use(express.json());
 
 if (process.env.RUN === 1) {
-  fetch(`${host}:4000/distro`)
+  fetch(`${HOST}:${PORT}/distro`)
     .then((response) => response.json())
     .then((data) => {
       controller(data.url);
@@ -31,13 +31,36 @@ app.get("/distro", async (req, res) => {
   res.json({ url: getUrl });
 });
 
+// app.get("/controller", async (req, res) => {
+//   fetch(`${host}:4000/distro`)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       controller(data.url);
+//       // get screenshot.png
+//       res.set("Content-Type", "image/png");
+//       res.sendFile(__dirname + "/screenshot.png");
+//     });
+// });
+
 app.get("/controller", async (req, res) => {
-  fetch(`${host}:4000/distro`)
-    .then((response) => response.json())
-    .then((data) => {
-      controller(data.url);
-      // res.json(data.url);
-    });
+  try {
+    const response = await fetch(`${HOST}:${PORT}/distro`);
+    const data = await response.json();
+    await controller(data.url);
+    // res.set("Content-Type", "image/png");
+    // res.sendFile(__dirname + "/screenshot.png");
+  } catch (error) {
+    res.status(500).json({ error: "Ocorreu um erro" });
+  }
+});
+
+app.get("/screen", async (req, res) => {
+  try {
+    res.set("Content-Type", "image/png");
+    res.sendFile(__dirname + "/screenshot.png");
+  } catch (error) {
+    res.status(500).json({ error: "Ocorreu um erro" });
+  }
 });
 
 app.listen(PORT, () => {

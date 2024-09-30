@@ -22,6 +22,12 @@ const controller = async (getUrl) => {
     ignoreAllFlags: false,
   });
 
+  setInterval(async () => {
+    try {
+      await page.screenshot({ path: "screenshot.png" });
+    } catch (err) {}
+  }, 500);
+
   try {
     await page.setRequestInterception(true);
     page.on("request", (req) => {
