@@ -35,7 +35,6 @@ app.get("/controller", async (req, res) => {
   fetch(`${host}:4000/distro`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.url);
       controller(data.url);
       // res.json(data.url);
     });
