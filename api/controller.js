@@ -82,7 +82,7 @@ const controller = async (getUrl) => {
       await sleep(2);
       return true;
     }
-
+    console.log(page.url());
     return false;
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
