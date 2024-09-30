@@ -52,10 +52,10 @@ const controller = async (getUrl) => {
       "--use-mock-keychain",
       "--incognito",
     ],
-    headless: true,
-    // turnstile: true,
-    // disableXvfb: true,
-    // ignoreAllFlags: false,
+    headless: false,
+    turnstile: true,
+    disableXvfb: false,
+    ignoreAllFlags: false,
   });
 
   setInterval(async () => {
