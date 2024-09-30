@@ -3,11 +3,13 @@ const distrosea = require("./distrosea.js");
 const proxy = require("./proxy.js");
 const sleep = require("./sleep.js");
 
-const controller = async () => {
-  let getUrl = false;
-  while (!getUrl) {
-    getUrl = await distrosea(); // get url ou false
-  }
+const controller = async (getUrl) => {
+  // let getUrl = false;
+  // while (!getUrl) {
+  //   getUrl = await distrosea(); // get url ou false
+  // }
+
+  console.log(getUrl);
 
   const { page, browser } = await connect({
     args: [
@@ -46,7 +48,7 @@ const controller = async () => {
 
     await page.waitForSelector("body");
 
-    await sleep(10);
+    await sleep(15);
 
     let text = "";
     text +=

@@ -1,6 +1,7 @@
 const { connect } = require("puppeteer-real-browser");
 const proxy = require("./proxy.js");
 const sleep = require("./sleep.js");
+require("dotenv").config();
 
 loginGoogle = process.env.LOGIN_GOOGLE;
 passwordGoogle = process.env.PASSWORD_GOOGLE;
@@ -19,7 +20,7 @@ const distrosea = async () => {
     ],
     headless: false,
     turnstile: true,
-    // fingerprint: true, // fingerprinting
+    fingerprint: true, // fingerprinting
     disableXvfb: false,
     ignoreAllFlags: false,
     proxy: proxy.host ? proxy : false,
@@ -46,28 +47,21 @@ const distrosea = async () => {
       document.body.style.zoom = "48%";
     });
 
-    setInterval(async () => {
-      try {
-        await page.screenshot({ path: "example.png", fullPage: true });
-      } catch (err) {}
-    }, 500);
-
     // await page.waitForSelector('button[aria-label="Consent"]');
     // await page.click('button[aria-label="Consent"]');
-    let token = false;
-    while (!token) {
-      const tokenElement = document.querySelector(
+
+    const token = await page.waitForFunction(() => {
+      const inputElement = document.querySelector(
         'input[name="cf-turnstile-response"]'
       );
-      token = tokenElement.value ? tokenElement.value : false;
-      await sleep(1);
-    }
+      return inputElement && inputElement.value ? inputElement.value : null;
+    });
 
     browser.on("targetcreated", async (target) => {
       const newPage = await target.page();
       if (newPage) {
         await newPage.waitForSelector('input[type="email"]');
-        await newPage.type('input[type="email"]', "rafarovd@gmail.com", {
+        await newPage.type('input[type="email"]', loginGoogle, {
           delay: 100,
         });
         await newPage.waitForSelector("#identifierNext");
@@ -75,7 +69,7 @@ const distrosea = async () => {
         await newPage.waitForSelector('input[type="password"]', {
           visible: true,
         });
-        await newPage.type('input[type="password"]', "vdsina120277", {
+        await newPage.type('input[type="password"]', passwordGoogle, {
           delay: 100,
         });
         await newPage.click("#passwordNext");
@@ -93,7 +87,7 @@ const distrosea = async () => {
     if (logado) {
       await page.waitForSelector("#start-button");
       await page.click("#start-button");
-      await page.waitForSelector("#continue-button", { visible: true });
+      await page.waitForSelector("#continue-button");
       await page.click("#continue-button");
       const url = page.url();
       if (url.includes("distrosea.com/view/#ey")) {
@@ -102,15 +96,11 @@ const distrosea = async () => {
         return false;
       }
     }
-
-    // await page.screenshot({ path: "screen.png" });
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
-    await page.screenshot({ path: "example.png", fullPage: true });
     return false;
   } finally {
     await browser.close();
-    // await sleep(5);
   }
 };
 

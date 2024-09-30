@@ -14,16 +14,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/distro", async (req, res) => {
-  // let getUrl = false;
-  // while (!getUrl) {
-  //   getUrl = await distrosea(); // get url ou false
-  // }
-  await distrosea();
-  res.set("Content-Type", "image/png");
-  res.sendFile(`${__dirname}/example.png`);
+  let getUrl = false;
+  while (!getUrl) {
+    getUrl = await distrosea(); // get url ou false
+  }
+  res.json({ url: getUrl });
+});
 
-  // res.json({ url: getUrl });
-  // await controller();
+app.get("/controller", async (req, res) => {
+  fetch("http://localhost:4000/distro")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data.url);
+    controller();
+    // res.json(data.url);
+  });
 });
 
 app.listen(PORT, () => {
