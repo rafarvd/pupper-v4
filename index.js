@@ -44,11 +44,13 @@ app.get("/distro", async (req, res) => {
 
 app.get("/controller", async (req, res) => {
   try {
-    const response = await fetch(`${HOST}:${PORT}/distro`);
-    const data = await response.json();
-    await controller(data.url);
-    // res.set("Content-Type", "image/png");
-    // res.sendFile(__dirname + "/screenshot.png");
+    let control = false;
+    while (!control) {
+      const response = await fetch(`${HOST}:${PORT}/distro`);
+      const data = await response.json();
+      control = await controller(data.url);
+      console.log(control ? true : false);
+    }
   } catch (error) {
     res.status(500).json({ error: "Ocorreu um erro" });
   }
