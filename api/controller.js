@@ -44,9 +44,7 @@ const controller = async (getUrl) => {
     });
 
     await page.goto(getUrl);
-
     await page.waitForSelector("body");
-
     await sleep(15);
 
     let text = "";
