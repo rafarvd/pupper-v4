@@ -76,11 +76,11 @@ const controller = async (getUrl) => {
     }
     await page.keyboard.press("Enter");
 
-    let verificarUrl = page.url()
+    let verificarUrl = page.url();
     while (verificarUrl.includes("distrosea.com/view")) {
       await sleep(10);
       await page.keyboard.press("Enter");
-      verificarUrl = page.url()
+      verificarUrl = page.url();
       await sleep(2);
       return true;
     }
