@@ -1,8 +1,26 @@
 const { connect } = require("puppeteer-real-browser");
 const proxy = require("./proxy.js");
 const sleep = require("./sleep.js");
+require("dotenv").config();
 
-const controller = async (getUrl) => {
+const host = process.env.HOST || "localhost";
+const port = process.env.PORT || 4000;
+
+const run = async () => {
+  // try {
+  //   const response = await fetch(`${host}:${port}/distro`);
+  //   const data = await response.json();
+  //   const getUrl = await controller(data.url);
+  // } catch (error) {
+  //   console.error(`Erro interno do servidor: ${error.message}`);
+  //   run();
+  // }
+
+  const response = await fetch(`${host}:${port}/distro`);
+  const data = await response.json();
+  const getUrl = data.url;
+
+  console.log(host);
   console.log(getUrl);
 
   const { page, browser } = await connect({
@@ -118,18 +136,15 @@ const controller = async (getUrl) => {
       const centerY = viewport.height / 2;
       await page.mouse.click(centerX, centerY);
       await sleep(2);
-      // return true;
     }
     console.log(page.url());
     await browser.close();
-    await sleep(10);
-    return false;
+    await sleep(5);
+    run();
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
-    return false;
-  } finally {
-    //await browser.close();
+    run();
   }
 };
 
-module.exports = controller;
+module.exports = run;
