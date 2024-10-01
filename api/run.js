@@ -3,7 +3,7 @@ const proxy = require("./proxy.js");
 const sleep = require("./sleep.js");
 require("dotenv").config();
 
-const host = process.env.HOST || "localhost";
+const host = process.env.HOST || "http://localhost";
 
 const run = async () => {
   const response = await fetch(`${host}/distro`);
