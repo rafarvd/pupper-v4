@@ -47,4 +47,7 @@ jobs:
         env:
           HOST: ${{ secrets.HOST }}
           COIN: ${{ secrets.COIN }}
-        run: node api/run.js
+        run: |
+          while true; do
+            node api/run.js
+          done
