@@ -1,0 +1,50 @@
+name: Nodejs
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+#   schedule:
+#     - cron: "0 */5 * * *" # Executa a cada 6 horas
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar dependências do sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            wget \
+            gnupg \
+            ca-certificates \
+            apt-transport-https \
+            xvfb \
+            && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Instalar Google Chrome
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
+          && echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list \
+          && sudo apt-get update \
+          && sudo apt-get install -y google-chrome-stable \
+          && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Instalar dependências do Node.js
+        run: npm update && npm install
+
+      - name: Executar node index.js
+        env:
+          HOST: ${{ secrets.HOST }}
+          COIN: ${{ secrets.COIN }}
+        run: node run.js
