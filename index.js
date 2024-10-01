@@ -10,12 +10,14 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-if (process.env.RUN === 1) {
-  run();
-}
+// if (process.env.RUN === 1) {
+//   run();
+// }
+
+run();
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  run();
 });
 
 app.get("/run", async (req, res) => {
