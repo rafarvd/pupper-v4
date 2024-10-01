@@ -4,10 +4,9 @@ const sleep = require("./sleep.js");
 require("dotenv").config();
 
 const host = process.env.HOST || "localhost";
-const port = process.env.PORT || 4000;
 
 const run = async () => {
-  const response = await fetch(`${host}:${port}/distro`);
+  const response = await fetch(`${host}/distro`);
   const data = await response.json();
   const getUrl = data.url;
 
@@ -136,8 +135,13 @@ const run = async () => {
     run();
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
-    await sleep(5);
-    run();
+    try {
+      await browser.close();
+      await sleep(5);
+      run();
+    } catch (error) {
+      run();
+    }
   }
 };
 
