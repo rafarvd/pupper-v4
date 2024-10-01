@@ -41,10 +41,18 @@ jobs:
           && sudo rm -rf /var/lib/apt/lists/*
 
       - name: Instalar dependências do Node.js
-        run: npm update && npm install
+        run: |
+          npm update
+          npm install
+          npm install -g pm2
 
       - name: Executar node index.js
         env:
-          HOST: ${{ secrets.HOST }}
+          IP_PROXY: ${{ secrets.IP_PROXY }}
+          PORT_PROXY: ${{ secrets.PORT_PROXY }}
+          USER_PROXY: ${{ secrets.USER_PROXY }}
+          PASS_PROXY: ${{ secrets.PASS_PROXY }}
+          LOGIN_GOOGLE: ${{ secrets.LOGIN_GOOGLE }}
+          PASSWORD_GOOGLE: ${{ secrets.PASSWORD_GOOGLE }}
           COIN: ${{ secrets.COIN }}
         run: node api/run.js
