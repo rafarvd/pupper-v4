@@ -132,15 +132,15 @@ const run = async () => {
     console.log(page.url());
     await browser.close();
     await sleep(5);
-    run();
+    await run();
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
     try {
       await browser.close();
       await sleep(5);
-      run();
+      await run();
     } catch (error) {
-      run();
+      await run();
     }
   }
 };

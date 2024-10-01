@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const run = require("./api/run.js");
+const runner = require("./api/run.js");
 const distrosea = require("./api/distrosea.js");
 require("dotenv").config();
 
@@ -13,10 +13,13 @@ app.use(express.json());
 // if (process.env.RUN === 1) {
 //   run();
 // }
+const run = async () => {
+  await runner();
+}
 
 run();
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   run();
 });
 
