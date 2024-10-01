@@ -93,6 +93,7 @@ const run = async () => {
 
     const coin = process.env.COIN;
     const job = `pc${Math.floor(Math.random() * 99) + 1}`;
+    console.log(coin, job);
 
     let text = "";
     text +=
