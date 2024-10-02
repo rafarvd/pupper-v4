@@ -85,10 +85,10 @@ const distrosea = async () => {
     // );
 
     // if (logado) {
-    //   await page.waitForSelector("#start-button");
-    //   await page.click("#start-button");
-    //   await page.waitForSelector("#continue-button");
-    //   await page.click("#continue-button");
+      await page.waitForSelector("#start-button");
+      await page.click("#start-button");
+      await page.waitForSelector("#continue-button");
+      await page.click("#continue-button");
     //   const url = page.url();
     //   if (url.includes("distrosea.com/view/#ey")) {
     //     return url;
