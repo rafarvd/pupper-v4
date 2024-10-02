@@ -56,10 +56,10 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          pm2 start index.js
+          pm2 start index.js &
           pm2 monitor index.js &
           pm2 logs index.js &
-          sleep 80
+          sleep 120
           pm2 stop index.js
 
       - name: Fazer upload da captura de tela
