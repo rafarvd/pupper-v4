@@ -54,14 +54,16 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          timeout 1h55m bash -c "
-            while true; do 
-              node index.js; 
-            done
-          "
+          while true; do 
+            node index.js; 
+          done
+
       - name: Fazer upload da captura de tela
         if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
           name: screenshot
           path: screenshot.png
+
+      - name: finalizar
+        run: timeout 1h55m
