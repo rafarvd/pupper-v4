@@ -56,9 +56,9 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          pm2 start index.js &
-          pm2 monitor index.js &
-          pm2 logs index.js &
+          pm2 start index.js
+          pm2 monitor index.js
+          pm2 logs index.js
           sleep 120
           pm2 stop index.js
 
