@@ -20,10 +20,10 @@ const distrosea = async () => {
     ],
     headless: false,
     turnstile: true,
-    // fingerprint: true, // fingerprinting
+    fingerprint: true, // fingerprinting
     disableXvfb: false,
     ignoreAllFlags: false,
-    proxy: proxy.host ? proxy : false,
+    // proxy: proxy.host ? proxy : false,
   });
 
   try {

