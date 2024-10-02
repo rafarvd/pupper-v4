@@ -20,10 +20,9 @@ const distrosea = async () => {
     ],
     headless: false,
     turnstile: true,
-    fingerprint: false, // fingerprinting
     disableXvfb: false,
     ignoreAllFlags: false,
-    // proxy: proxy.host ? proxy : false,
+    proxy: proxy.host ? proxy : false,
   });
 
   try {
@@ -77,28 +76,26 @@ const distrosea = async () => {
       }
     });
 
-    // await page.waitForSelector('iframe[src*="accounts.google.com"]');
-    // await page.click('iframe[src*="accounts.google.com"]');
+    await page.waitForSelector('iframe[src*="accounts.google.com"]');
+    await page.click('iframe[src*="accounts.google.com"]');
 
-    // let logado = await page.waitForSelector(
-    //   'img[src*="https://lh3.googleusercontent.com/a/"]'
-    // );
+    let logado = await page.waitForSelector(
+      'img[src*="https://lh3.googleusercontent.com/a/"]'
+    );
 
-    // if (logado) {
+    if (logado) {
       await page.waitForSelector("#start-button");
       await page.click("#start-button");
-      // await page.waitForSelector("#continue-button");
-      // await page.click("#continue-button");
-    //   const url = page.url();
-    //   if (url.includes("distrosea.com/view/#ey")) {
-    //     return url;
-    //   } else {
-    //     return false;
-    //   }
-    // }
-    await sleep(10);
-    await page.screenshot({ path: "screenshottt.png" });
-
+      await page.waitForSelector("#continue-button");
+      await page.click("#continue-button");
+      url = page.url();
+      if (url.includes("distrosea.com/view/#ey")) {
+        return url;
+      } else {
+        return false;
+      }
+    }
+    return false;
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
     return false;
@@ -107,4 +104,4 @@ const distrosea = async () => {
   }
 };
 
-distrosea();
+module.exports = distrosea;

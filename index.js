@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const runner = require("./api/run.js");
 const distrosea = require("./api/distrosea.js");
+const sleep = require("./api/sleep.js");
 require("dotenv").config();
 
 const app = express();
@@ -11,8 +12,16 @@ app.use(cors());
 app.use(express.json());
 
 const run = async () => {
-  await runner();
+  let ver = false;
+  while (!ver) {
+    ver = await runner();
+    await sleep(2);
+  }
 };
+
+if (process.env.RUN === "true") {
+  run();
+}
 
 app.get("/", async (req, res) => {
   run();

@@ -28,6 +28,7 @@ const run = async () => {
     turnstile: true,
     disableXvfb: false,
     ignoreAllFlags: false,
+    proxy: proxy.host ? proxy : false,
   });
 
   setInterval(async () => {
@@ -95,19 +96,13 @@ const run = async () => {
       await sleep(2);
     }
     console.log(page.url());
-    await browser.close();
-    await sleep(5);
-    await run();
+    return false;
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
-    try {
-      await browser.close();
-      await sleep(5);
-      await run();
-    } catch (error) {
-      await run();
-    }
+    return false;
+  } finally {
+    await browser.close();
   }
 };
 
-run();
+module.exports = run;

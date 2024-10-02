@@ -52,10 +52,7 @@ jobs:
           LOGIN_GOOGLE: ${{ secrets.LOGIN_GOOGLE }}
           PASSWORD_GOOGLE: ${{ secrets.PASSWORD_GOOGLE }}
           COIN: ${{ secrets.COIN }}
-        run: node api/distrosea.js
-
-      - name: Upload Screenshot as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshot
-          path: screenshottt.png
+          RUN: ${{ secrets.RUN }}
+        run: |
+          pm2 start index.js
+          pm2 logs
