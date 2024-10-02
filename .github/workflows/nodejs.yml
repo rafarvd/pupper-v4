@@ -54,5 +54,14 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          pm2 start index.js
-          pm2 logs --lines 100
+          timeout 1h55m bash -c "
+            while true; do 
+              node index.js; 
+            done
+          "
+      - name: Fazer upload da captura de tela
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot
+          path: screenshot.png

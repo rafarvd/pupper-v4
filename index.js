@@ -19,7 +19,7 @@ const run = async () => {
   }
 };
 
-if (process.env.RUN === "true") {
+if (process.env.RUN === "true" || process.env.RUN === "1") {
   run();
 }
 
