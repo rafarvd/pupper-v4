@@ -57,7 +57,7 @@ jobs:
           while true; do 
             node index.js; 
           done &
-          sleep 3m
+          sleep 2m
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
@@ -67,4 +67,4 @@ jobs:
           path: screenshot.png
 
       - name: finalizar
-        run: timeout 3m
+        run: timeout 2m echo "Finalizado"
