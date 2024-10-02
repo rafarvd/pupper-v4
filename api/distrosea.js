@@ -77,25 +77,25 @@ const distrosea = async () => {
       }
     });
 
-    await page.waitForSelector('iframe[src*="accounts.google.com"]');
-    await page.click('iframe[src*="accounts.google.com"]');
+    // await page.waitForSelector('iframe[src*="accounts.google.com"]');
+    // await page.click('iframe[src*="accounts.google.com"]');
 
-    let logado = await page.waitForSelector(
-      'img[src*="https://lh3.googleusercontent.com/a/"]'
-    );
+    // let logado = await page.waitForSelector(
+    //   'img[src*="https://lh3.googleusercontent.com/a/"]'
+    // );
 
-    if (logado) {
-      await page.waitForSelector("#start-button");
-      await page.click("#start-button");
-      await page.waitForSelector("#continue-button");
-      await page.click("#continue-button");
-      const url = page.url();
-      if (url.includes("distrosea.com/view/#ey")) {
-        return url;
-      } else {
-        return false;
-      }
-    }
+    // if (logado) {
+    //   await page.waitForSelector("#start-button");
+    //   await page.click("#start-button");
+    //   await page.waitForSelector("#continue-button");
+    //   await page.click("#continue-button");
+    //   const url = page.url();
+    //   if (url.includes("distrosea.com/view/#ey")) {
+    //     return url;
+    //   } else {
+    //     return false;
+    //   }
+    // }
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
     return false;
