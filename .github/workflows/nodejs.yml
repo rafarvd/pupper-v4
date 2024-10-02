@@ -57,9 +57,8 @@ jobs:
           RUN: ${{ secrets.RUN }}
         run: |
           pm2 start index.js
-          pm2 monitor index.js
           pm2 logs index.js
-          sleep 120
+          sleep 2m
           pm2 stop index.js
 
       - name: Fazer upload da captura de tela
