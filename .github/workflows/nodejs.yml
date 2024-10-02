@@ -53,7 +53,7 @@ jobs:
           PASSWORD_GOOGLE: ${{ secrets.PASSWORD_GOOGLE }}
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
-        run: |
-          while true; do
-            node index.js
-          done
+        run: node index.js
+          # while true; do
+          #   node index.js
+          # done
