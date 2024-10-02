@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const proxy = {
   host: process.env.IP_PROXY || false,
   port: process.env.PORT_PROXY,

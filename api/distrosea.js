@@ -6,8 +6,6 @@ require("dotenv").config();
 loginGoogle = process.env.LOGIN_GOOGLE;
 passwordGoogle = process.env.PASSWORD_GOOGLE;
 
-console.log(proxy);
-
 const distrosea = async () => {
   const { page, browser } = await connect({
     args: [

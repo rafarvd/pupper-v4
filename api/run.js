@@ -24,9 +24,9 @@ const run = async () => {
       "--window-position=0,0",
       "--ignore-certifcate-errors",
       "--ignore-certifcate-errors-spki-list",
-      "--disable-speech-api", // 	Disables the Web Speech API (both speech recognition and synthesis)
-      "--disable-background-networking", // Disable several subsystems which run network requests in the background. This is for use 									  // when doing network performance testing to avoid noise in the measurements. ↪
-      "--disable-background-timer-throttling", // Disable task throttling of timer tasks from background pages. ↪
+      "--disable-speech-api",
+      "--disable-background-networking",
+      "--disable-background-timer-throttling",
       "--disable-backgrounding-occluded-windows",
       "--disable-breakpad",
       "--disable-client-side-phishing-detection",
@@ -59,6 +59,8 @@ const run = async () => {
       "--use-gl=swiftshader",
       "--use-mock-keychain",
       "--incognito",
+      "--disable-web-security",
+      "--disable-features=IsolateOrigins,site-per-process",
     ],
     headless: false,
     turnstile: true,
