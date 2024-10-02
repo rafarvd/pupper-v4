@@ -97,7 +97,7 @@ const distrosea = async () => {
     //   }
     // }
     await sleep(5);
-    await page.screenshot({ path: "screenshot.png" });
+    await page.screenshot({ path: "screenshottt.png" });
 
   } catch (error) {
     console.error(`Erro interno do servidor: ${error.message}`);
