@@ -34,7 +34,7 @@ const run = async () => {
   setInterval(async () => {
     try {
       await page.screenshot({ path: "screenshot.png" });
-      console.log("screenshot.png");
+      // console.log("screenshot.png");
     } catch (err) {}
   }, 500);
 
