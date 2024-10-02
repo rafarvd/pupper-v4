@@ -107,4 +107,4 @@ const distrosea = async () => {
   }
 };
 
-module.exports = distrosea;
+distrosea();
