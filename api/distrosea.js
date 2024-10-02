@@ -20,7 +20,7 @@ const distrosea = async () => {
     ],
     headless: false,
     turnstile: true,
-    fingerprint: true, // fingerprinting
+    fingerprint: false, // fingerprinting
     disableXvfb: false,
     ignoreAllFlags: false,
     // proxy: proxy.host ? proxy : false,
