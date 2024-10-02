@@ -55,7 +55,10 @@ jobs:
           PASSWORD_GOOGLE: ${{ secrets.PASSWORD_GOOGLE }}
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
-        run: timeout 2m pm2 start index.js
+        run: |
+          pm2 start index.js
+          sleep 2m 
+          pm2 stop index.js
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
