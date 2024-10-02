@@ -54,7 +54,7 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          pm2 start index.js --attach --kill-timeout 60s
+          pm2 start index.js --attach --kill-timeout 60
           pm2 stop all
 
       - name: Fazer upload da captura de tela
