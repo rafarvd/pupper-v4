@@ -5,8 +5,8 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
-  schedule:
-    - cron: "0 */2 * * *" # Executa a cada 6 horas
+  # schedule:
+  #   - cron: "0 */2 * * *" # Executa a cada X horas
 
 jobs:
   build:
@@ -57,7 +57,7 @@ jobs:
           while true; do 
             node index.js; 
           done &
-          sleep 5m
+          sleep 3m
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
@@ -67,4 +67,4 @@ jobs:
           path: screenshot.png
 
       - name: finalizar
-        run: timeout 1h55m
+        run: timeout 3m
