@@ -5,11 +5,11 @@ const sleep = require("./sleep.js");
 require("dotenv").config();
 
 const run = async () => {
-  let getUrl = false;
-  while (!getUrl) {
-    getUrl = await distrosea();
-    await sleep(2);
-  }
+  // let getUrl = false;
+  // while (!getUrl) {
+  //   getUrl = await distrosea();
+  //   await sleep(2);
+  // }
 
   console.log(getUrl);
 
@@ -95,19 +95,26 @@ const run = async () => {
       await sleep(2);
     }
     console.log(page.url());
-    await browser.close();
-    await sleep(5);
-    await run();
+
   } catch (error) {
-    console.error(`Erro interno do servidor: ${error.message}`);
-    try {
-      await browser.close();
-      await sleep(5);
-      await run();
-    } catch (error) {
-      await run();
-    }
+    return false;
+  } finally {
+    await browser.close();
   }
+
+  //   await browser.close();
+  //   await sleep(5);
+  //   await run();
+  // } catch (error) {
+  //   console.error(`Erro interno do servidor: ${error.message}`);
+  //   try {
+  //     await browser.close();
+  //     await sleep(5);
+  //     await run();
+  //   } catch (error) {
+  //     await run();
+  //   }
+  
 };
 
 run();
