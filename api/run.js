@@ -34,7 +34,6 @@ const run = async () => {
   setInterval(async () => {
     try {
       await page.screenshot({ path: "screenshot.png" });
-      // console.log("screenshot.png");
     } catch (err) {}
   }, 500);
 
@@ -82,7 +81,7 @@ const run = async () => {
         await page.keyboard.type(char);
         await page.keyboard.up("Shift");
       } else {
-        await page.keyboard.type(char, { delay: 50 });
+        await page.keyboard.type(char, { delay: 80 });
       }
     }
     await page.keyboard.press("Enter");

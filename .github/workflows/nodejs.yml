@@ -53,11 +53,7 @@ jobs:
           PASSWORD_GOOGLE: ${{ secrets.PASSWORD_GOOGLE }}
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
-        run: |
-          while true; do 
-            node index.js; 
-          done &
-          sleep 2m
+        run: timeout 2m pm2 start index.js
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
@@ -66,5 +62,5 @@ jobs:
           name: screenshot
           path: screenshot.png
 
-      - name: finalizar
-        run: timeout 2m echo "Finalizado"
+      # - name: finalizar
+      #   run: timeout 2m echo "Finalizado"
