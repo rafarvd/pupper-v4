@@ -57,7 +57,7 @@ jobs:
           RUN: ${{ secrets.RUN }}
         run: |
           pm2 start index.js
-          pm2 logs index.js
+          pm2 logs index.js --lines 50
           sleep 2m
           pm2 stop index.js
 
