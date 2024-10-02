@@ -54,8 +54,17 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          pm2 start index.js --attach --kill-timeout 60
-          pm2 stop all
+          pm2 start index.js --kill-timeout 60
+
+      - name: Verificar logs do aplicativo em segundo plano
+        run: |
+          pm2 logs index &  # Exibe os logs em tempo real em segundo plano
+
+      - name: Aguardar 80 segundos
+        run: sleep 80
+
+      - name: Parar o aplicativo
+        run: pm2 stop index.js # Para o aplicativo
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
