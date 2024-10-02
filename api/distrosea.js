@@ -87,8 +87,8 @@ const distrosea = async () => {
     // if (logado) {
       await page.waitForSelector("#start-button");
       await page.click("#start-button");
-      await page.waitForSelector("#continue-button");
-      await page.click("#continue-button");
+      // await page.waitForSelector("#continue-button");
+      // await page.click("#continue-button");
     //   const url = page.url();
     //   if (url.includes("distrosea.com/view/#ey")) {
     //     return url;
@@ -96,7 +96,7 @@ const distrosea = async () => {
     //     return false;
     //   }
     // }
-    await sleep(5);
+    await sleep(10);
     await page.screenshot({ path: "screenshottt.png" });
 
   } catch (error) {
