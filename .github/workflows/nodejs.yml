@@ -59,6 +59,7 @@ jobs:
           timeout 55m bash -c "
           while true; do 
             node index.js;
+            sleep 2;
           done
           " || true
 
