@@ -54,7 +54,7 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          timeout 2m bash -c "
+          timeout 1m bash -c "
           while true; do
             node index.js
           done
