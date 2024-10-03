@@ -54,12 +54,12 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          timeout 1m bash -c "
+          timeout 2m bash -c "
           while true; do
             node index.js
           done
+          "
         continue-on-error: true
-
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
