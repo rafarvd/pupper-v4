@@ -54,7 +54,7 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         run: |
-          timeout 60 bash -c "
+          timeout 2m bash -c "
           while true; do
             node index.js
           done
@@ -66,6 +66,3 @@ jobs:
         with:
           name: screenshot
           path: screenshot.png
-
-      # - name: finalizar
-      #   run: timeout 2m echo "Finalizado"
