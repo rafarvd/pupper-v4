@@ -56,7 +56,7 @@ jobs:
         # timeout-minutes: 1
         # continue-on-error: true
         run: | 
-          timeout 55m bash -c "
+          timeout 1h bash -c "
           while true; do 
             node index.js;
             sleep 2;
