@@ -54,6 +54,7 @@ jobs:
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
         timeout-minutes: 1
+        continue-on-error: true
         run: |
           while true; do
             node index.js
