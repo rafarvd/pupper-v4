@@ -58,7 +58,8 @@ jobs:
           while true; do
             node index.js
           done
-          " || true
+        continue-on-error: true
+
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
