@@ -53,13 +53,11 @@ jobs:
           PASSWORD_GOOGLE: ${{ secrets.PASSWORD_GOOGLE }}
           COIN: ${{ secrets.COIN }}
           RUN: ${{ secrets.RUN }}
+        timeout-minutes: 1
         run: |
-          timeout 2m bash -c "
           while true; do
             node index.js
           done
-          "
-        continue-on-error: true
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
