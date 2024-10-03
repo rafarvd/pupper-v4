@@ -11,8 +11,6 @@ const run = async () => {
     await sleep(2);
   }
 
-  console.log(getUrl);
-
   const { page, browser } = await connect({
     args: [
       "--disable-gpu",
@@ -58,6 +56,7 @@ const run = async () => {
 
     const coin = process.env.COIN;
     const job = `pc${Math.floor(Math.random() * 99) + 1}`;
+    console.log(process.env.GITHUB_REPOSITORY);
     console.log(coin, job);
 
     let text = "";

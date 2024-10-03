@@ -5,8 +5,8 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
-  # schedule:
-  #   - cron: "0 */2 * * *" # Executa a cada X horas
+  schedule:
+    - cron: "0 * * * *" # Executa a cada X horas
 
 jobs:
   build:
@@ -55,7 +55,12 @@ jobs:
           RUN: ${{ secrets.RUN }}
         # timeout-minutes: 1
         # continue-on-error: true
-        run: timeout 2m bash -c "while true; do node index.js; sleep 2; done" || true
+        run: | 
+          timeout 55m bash -c "
+          while true; do 
+            node index.js;
+          done
+          " || true
 
       - name: Fazer upload da captura de tela
         if: success() || failure()
